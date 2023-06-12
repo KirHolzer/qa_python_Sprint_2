@@ -13,7 +13,7 @@ class TestBooksCollector:
         assert collector.favorites == []
 
 
-    def test_add_book_true(self):
+    def test_add_new_book_true(self):
         collector = BooksCollector()
         collector.add_new_book('Горе от ума')
         assert collector.books_rating == {'Горе от ума': 1}
@@ -23,6 +23,12 @@ class TestBooksCollector:
         collector.add_new_book('Крёстный отец')
         collector.add_new_book('Крёстный отец')
         assert collector.books_rating == {'Крёстный отец': 1}
+
+    def test_set_book_rating_not_in_list_false(self):
+        collector = BooksCollector()
+        collector.set_book_rating('Лолита', 9)
+        assert collector.books_rating == {}
+
 
     def test_set_book_rating_less_than_one_false(self):
         collector = BooksCollector()
@@ -45,6 +51,7 @@ class TestBooksCollector:
         collector.set_book_rating('Властелин колец', 10)
         collector.set_book_rating('Парфюмер', 1)
         assert collector.get_books_with_specific_rating(10) == ['Хоббит','Властелин колец']
+
 
     def test_get_book_rating_not_in_list_false(self):
         collector = BooksCollector()

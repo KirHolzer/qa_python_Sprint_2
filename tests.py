@@ -27,13 +27,19 @@ class TestBooksCollector:
         collector.set_book_rating('На западном фронте без перемен', 11)
         assert collector.books_rating == {'На западном фронте без перемен': 1}
 
-    def test_get_books_rating_true(self):
+    def test_get_books_rating_empty_dict_true(self):
         collector = BooksCollector()
         assert collector.books_rating == {}
 
     def test_get_book_rating_not_in_list_false(self):
         collector = BooksCollector()
         assert collector.get_book_rating('Капитанская дочка') == None
+
+    def test_get_favorites_empty_list(self):
+        collector = BooksCollector()
+        assert collector.favorites == []
+
+
 
 
 

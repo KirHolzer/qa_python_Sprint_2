@@ -17,9 +17,14 @@ class TestBooksCollector:
 
     def test_set_book_rating_more_than_ten_false(self):
         collector = BooksCollector()
-        collector.add_new_book('Властелин Колец')
-        collector.set_book_rating('Властелин Колец', 11)
-        assert collector.books_rating == {'Властелин Колец': 1}
+        collector.add_new_book('На западном фронте без перемен')
+        collector.set_book_rating('На западном фронте без перемен', 11)
+        assert collector.books_rating == {'На западном фронте без перемен': 1}
+
+    def test_get_book_rating_not_in_list_false(self):
+        collector = BooksCollector()
+        assert collector.get_book_rating('Капитанская дочка') == None
+
 
 
 

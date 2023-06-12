@@ -39,6 +39,11 @@ class TestBooksCollector:
         collector = BooksCollector()
         assert collector.favorites == []
 
+    def test_add_book_in_favorites_true(self):
+        collector = BooksCollector()
+        collector.add_new_book('Портрет Дориана Грея')
+        collector.add_book_in_favorites('Портрет Дориана Грея')
+        assert collector.favorites == ['Портрет Дориана Грея']
 
 
 

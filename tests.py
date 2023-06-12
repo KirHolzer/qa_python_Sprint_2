@@ -4,6 +4,15 @@ from main import BooksCollector
 # обязательно указывать префикс Test
 # pytest -v tests.py
 class TestBooksCollector:
+    def test_get_books_rating_empty_dict_true(self):
+        collector = BooksCollector()
+        assert collector.books_rating == {}
+
+    def test_get_favorites_empty_list(self):
+        collector = BooksCollector()
+        assert collector.favorites == []
+
+
     def test_add_book_true(self):
         collector = BooksCollector()
         collector.add_new_book('Горе от ума')
@@ -27,17 +36,21 @@ class TestBooksCollector:
         collector.set_book_rating('На западном фронте без перемен', 11)
         assert collector.books_rating == {'На западном фронте без перемен': 1}
 
-    def test_get_books_rating_empty_dict_true(self):
+    def test_get_books_with_specific_rating_true(self):
         collector = BooksCollector()
-        assert collector.books_rating == {}
+        collector.add_new_book('Хоббит')
+        collector.add_new_book('Властелин колец')
+        collector.add_new_book('Парфюмер')
+        collector.set_book_rating('Хоббит', 10)
+        collector.set_book_rating('Властелин колец', 10)
+        collector.set_book_rating('Парфюмер', 1)
+        assert collector.get_books_with_specific_rating(10) == ['Хоббит','Властелин колец']
 
     def test_get_book_rating_not_in_list_false(self):
         collector = BooksCollector()
         assert collector.get_book_rating('Капитанская дочка') == None
 
-    def test_get_favorites_empty_list(self):
-        collector = BooksCollector()
-        assert collector.favorites == []
+
 
     def test_add_book_in_favorites_true(self):
         collector = BooksCollector()
@@ -49,6 +62,7 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.add_book_in_favorites('Вечера на хуторе вблизь диканьки')
         assert collector.favorites == []
+
 
     def test_delete_book_from_favorites_true(self):
         collector = BooksCollector()

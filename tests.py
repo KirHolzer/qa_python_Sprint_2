@@ -1,8 +1,5 @@
 from main import BooksCollector
 
-# класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
-# обязательно указывать префикс Test
-# pytest -v tests.py
 class TestBooksCollector:
     def test_get_books_rating_empty_dict_true(self):
         collector = BooksCollector()
@@ -11,7 +8,6 @@ class TestBooksCollector:
     def test_get_favorites_empty_list(self):
         collector = BooksCollector()
         assert collector.favorites == []
-
 
     def test_add_new_book_true(self):
         collector = BooksCollector()
@@ -28,7 +24,6 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.set_book_rating('Лолита', 9)
         assert collector.books_rating == {}
-
 
     def test_set_book_rating_less_than_one_false(self):
         collector = BooksCollector()
@@ -52,12 +47,9 @@ class TestBooksCollector:
         collector.set_book_rating('Парфюмер', 1)
         assert collector.get_books_with_specific_rating(10) == ['Хоббит','Властелин колец']
 
-
     def test_get_book_rating_not_in_list_false(self):
         collector = BooksCollector()
         assert collector.get_book_rating('Капитанская дочка') == None
-
-
 
     def test_add_book_in_favorites_true(self):
         collector = BooksCollector()
@@ -70,7 +62,6 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Вечера на хуторе вблизь диканьки')
         assert collector.favorites == []
 
-
     def test_delete_book_from_favorites_true(self):
         collector = BooksCollector()
         collector.add_new_book('Моби Дик')
@@ -79,13 +70,4 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Ведьмак')
         collector.delete_book_from_favorites('Моби Дик')
         assert collector.favorites == ['Ведьмак']
-
-
-
-
-
-
-
-
-
 

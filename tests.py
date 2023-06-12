@@ -1,7 +1,6 @@
-from main import BooksCollector
+import pytest
 
 
-# pytest -v tests.py
 class TestBooksCollector:
 
     def test_add_new_book_true(self, collector):
@@ -36,16 +35,18 @@ class TestBooksCollector:
         collector.set_book_rating('Парфюмер', 1)
         assert collector.get_books_with_specific_rating(10) == ['Хоббит','Властелин колец']
 
-    def test_get_book_rating_not_in_list_false(self, collector):
-        assert collector.get_book_rating('Капитанская дочка') == None
+    @pytest.mark.parametrize("book_title",['Капитанская дочка','Евгений Онегин'])
+    def test_get_book_rating_not_in_list_false(self, collector, book_title):
+        assert collector.get_book_rating(book_title) == None
 
     def test_add_book_in_favorites_true(self, collector):
         collector.add_new_book('Портрет Дориана Грея')
         collector.add_book_in_favorites('Портрет Дориана Грея')
         assert collector.favorites == ['Портрет Дориана Грея']
 
-    def test_book_not_in_list_add_in_favorites_false(self, collector):
-        collector.add_book_in_favorites('Вечера на хуторе вблизь диканьки')
+    @pytest.mark.parametrize("book_title", ['Вечера на хуторе вблизь диканьки', 'Ревизор', 'Мертвые души'])
+    def test_book_not_in_list_add_in_favorites_false(self, collector, book_title):
+        collector.add_book_in_favorites(book_title)
         assert collector.favorites == []
 
     def test_delete_book_from_favorites_true(self, collector):
@@ -55,4 +56,16 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Ведьмак')
         collector.delete_book_from_favorites('Моби Дик')
         assert collector.favorites == ['Ведьмак']
+
+    def test_get_book_rating_by_name_true(self, collector):
+        collector.add_new_book('Мемуары гейши')
+        collector.set_book_rating('Мемуары гейши', 6)
+        collector.add_new_book('Ведьмак')
+        assert collector.get_book_rating('Мемуары гейши') == 6
+
+    def test_get_books_rating_true(self, collector):
+        collector.add_new_book('Великий Гэтсби')
+        collector.add_new_book('Граф Монте-Кристо')
+        collector.set_book_rating('Граф Монте-Кристо', 8)
+        assert collector.get_books_rating() == {'Великий Гэтсби': 1, 'Граф Монте-Кристо': 8}
 

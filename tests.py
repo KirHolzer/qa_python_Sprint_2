@@ -50,6 +50,15 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Вечера на хуторе вблизь диканьки')
         assert collector.favorites == []
 
+    def test_delete_book_from_favorites_true(self):
+        collector = BooksCollector()
+        collector.add_new_book('Моби Дик')
+        collector.add_new_book('Ведьмак')
+        collector.add_book_in_favorites('Моби Дик')
+        collector.add_book_in_favorites('Ведьмак')
+        collector.delete_book_from_favorites('Моби Дик')
+        assert collector.favorites == ['Ведьмак']
+
 
 
 

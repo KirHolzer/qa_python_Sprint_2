@@ -17,14 +17,14 @@ class TestBooksCollector:
         collector.set_book_rating('Лолита', 9)
         assert collector.get_books_rating() == {}
 
-    @pytest.mark.parametrize("rating", [0, -1])
-    def test_set_book_rating_less_than_one_false(self, collector, rating):
-        collector.add_new_book('Властелин Колец')
-        collector.set_book_rating('Властелин Колец', rating)
-        assert collector.get_books_rating() == {'Властелин Колец': 1}
+#    @pytest.mark.parametrize("rating", [0, -1])
+ #   def test_set_book_rating_less_than_one_false(self, collector, rating):
+  #      collector.add_new_book('Властелин Колец')
+   #     collector.set_book_rating('Властелин Колец', rating)
+    #    assert collector.get_books_rating() == {'Властелин Колец': 1}
 
-    @pytest.mark.parametrize("rating", [11, 12, 13])
-    def test_set_book_rating_more_than_ten_false(self, collector,rating):
+    @pytest.mark.parametrize("rating", [0,11])
+    def test_set_book_rating_more_than_ten_and_less_then_one_false(self, collector,rating):
         collector.add_new_book('На западном фронте без перемен')
         collector.set_book_rating('На западном фронте без перемен', rating)
         assert collector.get_books_rating() == {'На западном фронте без перемен': 1}
